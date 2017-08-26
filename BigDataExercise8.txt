@@ -1,0 +1,44 @@
+1.
+在后续的发展过程中，Hadoop对MapReduce和HDFS的许多方面做了有针对性的改进和提升
+
+2.
+带来单点失效问题和无法实现资源隔离的问题
+
+3.
+设置了两个名称节点， 其中一个节点处于“活跃”状态，其中一个节点处于“待命”状态
+
+4.
+活跃名称节点将更新数据写到存储系统中，待命名称节点会一直监听该系统，一旦发现有新的写入，就会立即从公共存储系统中读取这些数据并加载到自己的内存中，从而保证与活跃节点状态完全同步
+
+5.
+HDFS联邦很好地解决了HDFS在可扩展性、系统性能和隔离性三个方面的问题
+
+6.
+块池的概念：每一个命名空间管理属于自己的一组块，这些同属于一个命名空间的块构成了一个“块池”
+块池中的各个块实际上是存储在各个不同的数据节点中的。
+
+7.
+MapReduce存在的问题，存在单点故障， JobTracker任务过重， 容易出现内存溢出， 资源划分不可理
+
+8.
+ResourceManager是一个全局的资源管理器， 负责整个系统的资源管理和分配， ApplicationMaster。。。。。。 NodeManager主要负责容器生命周期管理，监控每个容器的资源使用情况
+
+9.
+1). 用户编写客户端应用程序
+2). ResourceManager负责接收和处理来自客户端的请求
+3). ApplicationMaster被创建后首先向ResourceManager注册
+4). ApplicationMaster向ResourceManager申请资源
+5). ResourceManager向ApplicationMaster分配资源
+6). ApplicationMaster请求容器启动任务
+7). 各个任务向ApplicatiponMaster汇报自己的状态和进度
+8). 应用程序运行完成
+
+10.
+1). 大大减少了承担中心服务功能的ResourceManager的资源消耗
+2). 使得MapReduce完全成为一个计算框架，而不需要成为资源调度框架
+3). YARN中的资源管理比MapReduce1.0更加高效
+
+11.
+Pig是HADOOP集群中的一个组件，允许用户编写简单的脚本实现复杂的数据分析
+TEZ是Apache开源的支持的DAG作业的计算框架
+kafka是一种高吞吐量的分布式订阅消息系统
